@@ -1,117 +1,48 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
+import React from 'react';
+import {Login} from './src/views/Login/Login';
+import {SignUp} from './src/views/Login/SignUp';
+import {RecoverPassword} from './src/views/Login/ResetPassword';
+import {CreateNewPassword} from './src/views/Login/CreateNewPassword';
+import {UpdatePassConfirmation} from './src/views/Login/UpdatePassConfirmation';
+import {NavigationContainer} from '@react-navigation/native';
+import {Home} from './src/views/Signatures/Home';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import React, {type PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section: React.FC<
-  PropsWithChildren<{
-    title: string;
-  }>
-> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    // <SafeAreaView style={{backgroundColor: '#F2F1F6', flex: 1}}>
+    //   {/* <Login /> */}
+    //   {/* <SignUp /> */}
+    //   {/* <RecoverPassword /> */}
+    //   {/* <CreateNewPassword /> */}
+    //   {/* <UpdatePassConfirmation /> */}
+    // {/* </SafeAreaView> */}
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="LogIn"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="LogIn" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen
+          name="RecoverPassword"
+          component={RecoverPassword}
+          options={{title: 'Forgot password'}}
+        />
+        <Stack.Screen
+          name="UpdatePassConfirmation"
+          component={UpdatePassConfirmation}
+        />
+        <Stack.Screen
+          name="CreateNewPassword"
+          component={CreateNewPassword}
+          options={{title: 'New password'}}
+        />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
