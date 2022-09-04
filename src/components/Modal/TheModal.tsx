@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Modal} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {TheButton} from '../TheButton';
 import {TheText} from '../TheText';
 
@@ -48,10 +49,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     alignSelf: 'center',
+    color: '#262B40',
   },
   text: {
     fontSize: 20,
     alignSelf: 'center',
+    color: '#262B40',
   },
   button: {
     backgroundColor: '#262B40',

@@ -4,17 +4,22 @@ import React from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
 import {TheLoginHeader} from '../../components/Login/TheLoginHeader';
 import {TheText} from '../../components/TheText';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {LogInRequest} from './Service/LoginService';
+import {AuthContext} from '../../context/authContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const Login = ({navigation}: any) => {
+export const Login = ({navigation, route}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailEror, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [genericError, setGenericError] = useState(false);
+
+  const {signIn, status} = useContext(AuthContext);
 
   const formErrors: any = {
-    emailEror,
+    emailError,
     passwordError,
   };
 
@@ -29,15 +34,29 @@ export const Login = ({navigation}: any) => {
   };
 
   const makeRequest = async () => {
-    const response: any = await LogInRequest({email, password});
-    console.log(response);
-    response.valid ? navigation.navigate('Home') : null;
-    if (!response?.error) {
-      response.data.valid ? navigation.navigate('Home') : null;
-    } else {
-      setEmailError(true);
+    try {
+      if (email && password) {
+        setGenericError(false);
+        const response: any = await LogInRequest({email, password});
+        if (response.data.valid) {
+          await AsyncStorage.setItem('userData', response.data.user);
+          signIn(response.data.user);
+        } else {
+          setGenericError(true);
+        }
+      } else {
+        if (!email) {
+          setEmailError(true);
+        }
+        if (!password) {
+          setPasswordError(true);
+        }
+      }
+    } catch (e) {
+      setGenericError(true);
     }
   };
+  console.log(status);
 
   return (
     <View style={styles.container}>
@@ -60,7 +79,7 @@ export const Login = ({navigation}: any) => {
               }
             }}
           />
-          {emailEror ? (
+          {emailError ? (
             <TheText
               text="Please, enter a valid email"
               styles={{color: 'red', alignSelf: 'center'}}
@@ -82,6 +101,13 @@ export const Login = ({navigation}: any) => {
             {passwordError ? (
               <TheText
                 text="Please, enter a password"
+                styles={{color: 'red', alignSelf: 'center'}}
+              />
+            ) : null}
+
+            {genericError ? (
+              <TheText
+                text="There was an error, please try again"
                 styles={{color: 'red', alignSelf: 'center'}}
               />
             ) : null}
