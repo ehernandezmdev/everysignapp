@@ -12,7 +12,6 @@ const Stack = createNativeStackNavigator();
 
 export const Navigator = () => {
   const {status} = useContext(AuthContext);
-  console.log(`status ${status}`);
 
   return (
     <Stack.Navigator

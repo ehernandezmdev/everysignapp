@@ -31,7 +31,6 @@ export const AuthProvider = ({children}: any) => {
 
   const checkToken = async () => {
     const token = await AsyncStorage.getItem('userData');
-    console.log(token);
     if (!token) return dispatch({type: 'notAuthenticated'});
 
     dispatch({

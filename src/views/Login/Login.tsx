@@ -16,7 +16,7 @@ export const Login = ({navigation, route}: any) => {
   const [passwordError, setPasswordError] = useState(false);
   const [genericError, setGenericError] = useState(false);
 
-  const {signIn, status} = useContext(AuthContext);
+  const {signIn} = useContext(AuthContext);
 
   const formErrors: any = {
     emailError,
@@ -56,7 +56,6 @@ export const Login = ({navigation, route}: any) => {
       setGenericError(true);
     }
   };
-  console.log(status);
 
   return (
     <View style={styles.container}>

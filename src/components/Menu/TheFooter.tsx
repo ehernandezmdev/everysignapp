@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {TheText} from '../TheText';
 import {useState} from 'react';
+import {userData} from '../../data/userData';
+import {AuthContext} from '../../context/authContext';
 
 interface Footer {
   setSection: (arg: string) => void;
 }
 
 export const TheFooter = ({setSection}: Footer) => {
+  const {deleteUserData} = userData();
+  const {logOut} = useContext(AuthContext);
   const [inboxActive, setInboxActive] = useState(true);
   const [sharingActive, setSharingActive] = useState(false);
   const [browseActive, setBrowseActive] = useState(false);
@@ -25,6 +29,15 @@ export const TheFooter = ({setSection}: Footer) => {
         sectionFunctions[section](true);
         setSection(key);
       }
+    }
+  };
+
+  const logOutButton = async () => {
+    try {
+      await deleteUserData();
+      logOut();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -56,6 +69,15 @@ export const TheFooter = ({setSection}: Footer) => {
           style={styles.img}
         />
         <TheText text="Browse" styles={styles.text} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={!browseActive ? styles.deactiveSection : null}
+        onPress={() => logOutButton()}>
+        <Image
+          source={require('../../../assets/img/menu/logout.png')}
+          style={styles.img}
+        />
+        <TheText text="LogOut" styles={styles.text} />
       </TouchableOpacity>
     </View>
   );

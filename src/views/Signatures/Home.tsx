@@ -1,16 +1,11 @@
 import {TheFooter} from '../../components/Menu/TheFooter';
-import React, {useEffect} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {TheHeader} from '../../components/Menu/TheHeader';
-import {useState, useContext} from 'react';
-import {userData} from '../../data/userData';
-import {AuthContext} from '../../context/authContext';
+import React, {useState} from 'react';
 
-export const Home = ({route}: any) => {
-  const {logOut} = useContext(AuthContext);
+export const Home = () => {
   const [section, setSection] = useState('inbox');
-  const {deleteUserData} = userData();
 
   const showSection = () => {
     if (section === 'inbox') {
@@ -26,26 +21,18 @@ export const Home = ({route}: any) => {
     setSection(section);
   };
 
-  const logOutButton = async () => {
-    try {
-      await deleteUserData();
-      logOut();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1}}>
         {showSection()}
-        <TouchableOpacity
-          style={{position: 'absolute', bottom: '50%', right: '50%'}}
-          onPress={() => logOutButton()}>
-          <Text>LogOut</Text>
-        </TouchableOpacity>
         <TheFooter setSection={setSectionFromChildren} />
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  logOut: {
+    position: 'absolute',
+  },
+});
