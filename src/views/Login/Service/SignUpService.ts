@@ -19,10 +19,8 @@ export const SignUpRequest = async ({first_name, last_name, email, password1, pa
       },
       body: formData,
     });
-    console.log(response.status)
     if (response.ok) {
       const {valid, errors}: ResponseInterface = await response.json();
-      console.log('asdf')
       const errores: any = {};
       if (!valid) {
         const splitErrors = errors.split('\n');

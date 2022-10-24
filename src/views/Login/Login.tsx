@@ -1,13 +1,14 @@
 import {TheButton} from '../../components/TheButton';
 import {TheInput} from '../../components/TheInput';
 import React from 'react';
-import {View, StyleSheet, Platform} from 'react-native';
+import {View, StyleSheet, Platform, ScrollView} from 'react-native';
 import {TheLoginHeader} from '../../components/Login/TheLoginHeader';
 import {TheText} from '../../components/TheText';
 import {useState, useContext} from 'react';
 import {LogInRequest} from './Service/LoginService';
 import {AuthContext} from '../../context/authContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {TheLoading} from '../../components/TheLoading';
 
 export const Login = ({navigation, route}: any) => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ export const Login = ({navigation, route}: any) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [genericError, setGenericError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {signIn} = useContext(AuthContext);
 
@@ -34,6 +36,7 @@ export const Login = ({navigation, route}: any) => {
   };
 
   const makeRequest = async () => {
+    setLoading(true);
     try {
       if (email && password) {
         setGenericError(false);
@@ -55,10 +58,12 @@ export const Login = ({navigation, route}: any) => {
     } catch (e) {
       setGenericError(true);
     }
+    setLoading(false);
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
+      {loading ? <TheLoading /> : null}
       <TheLoginHeader title="Welcome Back!" />
       <View style={[styles.credentials, {width: '100%', margin: 30}]}>
         <View>
@@ -77,6 +82,7 @@ export const Login = ({navigation, route}: any) => {
                 setEmailError(false);
               }
             }}
+            autoCorrect={false}
           />
           {emailError ? (
             <TheText
@@ -131,7 +137,7 @@ export const Login = ({navigation, route}: any) => {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

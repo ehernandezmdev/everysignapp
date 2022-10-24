@@ -24,6 +24,9 @@ export const RecoverPassword = ({navigation}: any) => {
   const checkEmail = async () => {
     setLoadingRequest(true);
     try {
+      if (showMessageError) {
+        throw new Error();
+      }
       const resposne = await fetch(
         `https://2d12-187-161-10-73.ngrok.io/user/settings/reset_pass_mail/${email}`,
         {
@@ -62,6 +65,7 @@ export const RecoverPassword = ({navigation}: any) => {
         <TheInput
           placeholder="Enter your email address"
           value={email}
+          autoCorrect={false}
           onChangeText={(email: string) => {
             setEmail(email);
             if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {

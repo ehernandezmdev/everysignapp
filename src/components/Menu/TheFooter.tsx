@@ -71,7 +71,7 @@ export const TheFooter = ({setSection}: Footer) => {
         <TheText text="Browse" styles={styles.text} />
       </TouchableOpacity>
       <TouchableOpacity
-        style={!browseActive ? styles.deactiveSection : null}
+        // style={!browseActive ? styles.deactiveSection : null}
         onPress={() => logOutButton()}>
         <Image
           source={require('../../../assets/img/menu/logout.png')}

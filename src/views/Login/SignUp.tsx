@@ -61,9 +61,13 @@ export const SignUp = ({navigation}: any) => {
     for (const field in checkFields) {
       if (!checkFields[field]) {
         errorFunct[field][1](true);
-        field in errorPassEmail
-          ? errorPassEmail[field](`Please enter your ${field}`)
-          : null;
+        if (field in errorPassEmail) {
+          const messageErrorField =
+            field.substring(0, field.length - 1) === 'password'
+              ? 'password'
+              : field;
+          errorPassEmail[field](`Please enter your ${messageErrorField}`);
+        }
       }
     }
     for (const key in errorFunct) {
@@ -179,6 +183,7 @@ export const SignUp = ({navigation}: any) => {
                     }
                   }}
                   autoCapitalize="none"
+                  autoCorrect={false}
                 />
                 {emailError ? (
                   <TheText text={emailErrorText} styles={styles.errorText} />

@@ -12,7 +12,7 @@ export const Home = () => {
       return <TheHeader title="Inbox" />;
     } else if (section === 'sharing') {
       return <TheHeader title="Sharing" />;
-    } else {
+    } else if (section === 'browse') {
       return <TheHeader title="Browse" />;
     }
   };

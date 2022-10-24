@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 1,
+    opacity: 0.9,
   },
   modal: {
     backgroundColor: 'white',
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     width: '70%',
     height: '30%',
+    opacity: 1,
   },
   title: {
     fontSize: 30,
