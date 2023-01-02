@@ -17,9 +17,9 @@ export const TheFooter = ({setSection}: Footer) => {
   const [browseActive, setBrowseActive] = useState(false);
 
   const sectionFunctions: any = {
-    inbox: setInboxActive,
-    sharing: setSharingActive,
-    browse: setBrowseActive,
+    Inbox: setInboxActive,
+    Sharing: setSharingActive,
+    Browse: setBrowseActive,
   };
 
   const deactivateSection = (key: string) => {
@@ -45,7 +45,7 @@ export const TheFooter = ({setSection}: Footer) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={!inboxActive ? styles.deactiveSection : null}
-        onPress={() => deactivateSection('inbox')}>
+        onPress={() => deactivateSection('Inbox')}>
         <Image
           source={require('../../../assets/img/menu/inbox.png')}
           style={styles.img}
@@ -54,7 +54,7 @@ export const TheFooter = ({setSection}: Footer) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={!sharingActive ? styles.deactiveSection : null}
-        onPress={() => deactivateSection('sharing')}>
+        onPress={() => deactivateSection('Sharing')}>
         <Image
           source={require('../../../assets/img/menu/group.png')}
           style={styles.img}
@@ -63,7 +63,7 @@ export const TheFooter = ({setSection}: Footer) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={!browseActive ? styles.deactiveSection : null}
-        onPress={() => deactivateSection('browse')}>
+        onPress={() => deactivateSection('Browse')}>
         <Image
           source={require('../../../assets/img/menu/search.png')}
           style={styles.img}

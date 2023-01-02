@@ -5,6 +5,7 @@ import {RecoverPassword} from '../views/Login/ResetPassword';
 import {CreateNewPassword} from '../views/Login/CreateNewPassword';
 import {UpdatePassConfirmation} from '../views/Login/UpdatePassConfirmation';
 import {Home} from '../views/Signatures/Home';
+import {PdfViewer} from '../views/Pdf/PdfViewer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AuthContext} from '../context/authContext';
 
@@ -18,7 +19,10 @@ export const Navigator = () => {
       initialRouteName="LogIn"
       screenOptions={{headerShown: false}}>
       {status === 'authenticated' ? (
-        <Stack.Screen name="Home" component={Home} />
+        <>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="PdfViewer" component={PdfViewer} />
+        </>
       ) : (
         <>
           <Stack.Screen name="LogIn" component={Login} />

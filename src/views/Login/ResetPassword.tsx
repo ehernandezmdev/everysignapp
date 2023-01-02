@@ -39,9 +39,7 @@ export const RecoverPassword = ({navigation}: any) => {
         setShowMessageError(true);
         setMessageError(textErrors[resposne.status]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     setLoadingRequest(false);
   };
 

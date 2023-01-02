@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: '110%',
     opacity: 0.6,
     zIndex: 1,
   },

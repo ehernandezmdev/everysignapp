@@ -13,6 +13,7 @@ interface Props {
   onPress?: () => void;
   styles?: Object;
   textColor?: string;
+  textSize?: number;
 }
 
 export const TheButton = ({
@@ -20,6 +21,7 @@ export const TheButton = ({
   onPress,
   styles,
   textColor = '#262B40',
+  textSize = 18,
 }: Props) => {
   const ios = () => {
     return (
@@ -27,7 +29,7 @@ export const TheButton = ({
         <View style={[bStyles.fab, styles]}>
           <TheText
             text={title}
-            styles={[bStyles.fabText, {color: textColor}]}
+            styles={[bStyles.fabText, {color: textColor, fontSize: textSize}]}
           />
         </View>
       </TouchableOpacity>
@@ -43,7 +45,7 @@ export const TheButton = ({
           <View style={[bStyles.fab, styles, {justifyContent: 'center'}]}>
             <TheText
               text={title}
-              styles={[bStyles.fabText, {color: textColor}]}
+              styles={[bStyles.fabText, {color: textColor, fontSize: textSize}]}
             />
           </View>
         </TouchableNativeFeedback>
@@ -69,7 +71,6 @@ const bStyles = StyleSheet.create({
     borderRadius: 10,
   },
   fabText: {
-    fontSize: 18,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
